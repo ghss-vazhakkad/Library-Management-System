@@ -8,11 +8,10 @@ from refbook import RefBook
 from openpyxl import Workbook, load_workbook
 
 
-logindata = ["guest"]
+logindata = ["Ihjas","1234"]
 
 bookxl = load_workbook("data/books.xlsx")
 main = len(bookxl["Main"]["A"])
-print(main)
 books = []
 for i in range(1,main):
     books.append(Book.loadfromrow(bookxl["Main"][i+1]))
@@ -25,17 +24,20 @@ class Main(QMainWindow):
         self.actionModifyBook.triggered.connect(self.login)
         self.userdata = logindata
         for book in books:
-            model = QStandardItemModel()
-            self.bookList.setModel(model)
+            self.bookmodel = QStandardItemModel()
+            self.bookList.setModel(self.bookmodel)
             item = QStandardItem(book.title)
-            model.appendRow(item)
+            item.setEditable(False)
+            self.bookmodel.appendRow(item)
+        self.actionAddBook.triggered.connect(self.addbook)
         self.show()
     def login(self,b):
         self.window1 = Login(self)
     def logged(self):
         if(self.access == "ADMIN"):
             self.admin(True)
-
+    def addbook(self):
+        self.addwin = BookEntry()
     def admin(self,state):
         self.bookmenu = [self.actionAddBook,self.actionEditBook,self.actionDeleteBook,self.actionIssueBook,self.actionReserveBook,self.actionSearchBook]
         if(state):
