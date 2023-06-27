@@ -8,7 +8,7 @@ from refbook import RefBook
 from openpyxl import Workbook, load_workbook
 
 
-logindata = ["Ihjas","1234"]
+logindata = ["Ihjas"]
 book = Book()
 class Main(QMainWindow):
     def __init__(self):
