@@ -11,6 +11,7 @@ class BookEntry(QDialog):
     def __init__(self,parent):
         super(BookEntry, self).__init__()
         uic.loadUi('res/bookentry.ui', self)
+        self.setFixedSize(self.size())
         self.parent = parent
         self.submit.clicked.connect(self.onadd)
         self.show()
@@ -65,6 +66,7 @@ class Book:
         self.etype = 0
         self.author = ""
         self.issued = "none"
+        self.row = 0
     def loadfromrow(row):
         rt = Book()
         dt=str(row[0].value).split("-")
@@ -88,8 +90,9 @@ class Book:
         sheet = load_workbook(path)
         last = len(sheet["Main"]["A"])
         for i in range(1,last):
-            if(sheet["Main"][i][0].value == None):
-                last = i
+            if(sheet["Main"][i][0].value == None  or sheet["Main"][i][0].value == ""):
+                last = i-1
+                break
         row = sheet["Main"][last+1]
         row[0].value = str(self.date[0])+"-"+str(self.date[1])+"-"+str(self.date[2])
         row[1].value = self.title
@@ -104,3 +107,21 @@ class Book:
         row[3].value = self.author
         row[11].value = self.issued
         sheet.save(path)
+    def replace(self,path):
+        book = load_workbook(path)
+        sheet = book["Main"]
+        row = sheet[self.row]
+        row[0].value = str(self.date[0])+"-"+str(self.date[1])+"-"+str(self.date[2])
+        row[1].value = self.title
+        row[2].value = self.id
+        row[4].value = self.subject
+        row[5].value = self.language
+        row[6].value = self.price
+        row[7].value = self.publisher
+        row[8].value = self.year
+        row[9].value = self.booktype
+        row[10].value = self.etype
+        row[3].value = self.author
+        row[11].value = self.issued
+        book.save(path)
+        

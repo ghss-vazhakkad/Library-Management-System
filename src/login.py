@@ -10,6 +10,7 @@ class Login(QWidget):
     def __init__(self,parent):
         super(Login, self).__init__()
         uic.loadUi('res/login.ui', self)
+        self.setFixedSize(self.size())
         self.username.setText(parent.userdata[0])
         self.parent = parent
         self.loginButton.clicked.connect(self.trylogin)

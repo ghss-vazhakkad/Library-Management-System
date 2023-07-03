@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Library Manager
+Comment=Library Management System made using python3
+Exec=%install%/library
+Icon=%install%/res/icon.png
+Terminal=false
+Type=Application
+Categories=Application;Office;
+StartupNotify=true

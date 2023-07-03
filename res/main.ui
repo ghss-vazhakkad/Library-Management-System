@@ -28,7 +28,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QListView" name="bookList_2">
+   <widget class="QListView" name="memberList">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -106,9 +106,8 @@
      <property name="title">
       <string>Member</string>
      </property>
-     <addaction name="actionAdd"/>
+     <addaction name="actionAddMember"/>
      <addaction name="actionDelete"/>
-     <addaction name="actionSearch"/>
     </widget>
     <widget class="QMenu" name="menubook">
      <property name="title">
@@ -120,7 +119,6 @@
      <addaction name="actionDeleteBook"/>
      <addaction name="actionIssueBook"/>
      <addaction name="actionReserveBook"/>
-     <addaction name="actionSearchBook"/>
     </widget>
     <addaction name="menuMember"/>
     <addaction name="menubook"/>
@@ -185,7 +183,10 @@
     <string>Library Card</string>
    </property>
   </action>
-  <action name="actionAdd">
+  <action name="actionAddMember">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Add</string>
    </property>

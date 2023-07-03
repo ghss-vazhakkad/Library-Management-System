@@ -7,4 +7,5 @@ class RefBook(QDialog):
     def __init__(self):
         super(RefBook, self).__init__()
         uic.loadUi('res/refbook.ui', self)
+        self.setFixedSize(self.size())
         self.show()
