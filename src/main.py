@@ -6,6 +6,7 @@ from login import Login
 from bookentry import *
 from refbook import RefBook
 from openpyxl import Workbook, load_workbook
+from PyQt5.QtGui import QPixmap
 from member import *
 class Dialog(QDialog):
     def __init__(self,title,message):
@@ -17,18 +18,18 @@ class Dialog(QDialog):
         
         self.show()
 
-logindata = ["Ihjas"]
+logindata = [""]
 book = Book()
 class Main(QMainWindow):
     def __init__(self):
         super(Main, self).__init__()
         uic.loadUi('res/main.ui', self)
-        self.setFixedSize(self.size())
-        self.actionModifyBook.triggered.connect(self.login)
+        self.setWindowState(QtCore.Qt.WindowState.WindowMaximized)
+        self.ciec.setVisible(False)
+        self.loginBtn.clicked.connect(self.login)
         self.actionAddMember.triggered.connect(self.addmember)
         self.userdata = logindata
         self.loadbooks()
-
         self.adminuser = False
         self.bookclk = self.memberclk = False
         self.loadmembers()
@@ -182,12 +183,21 @@ class Main(QMainWindow):
     def admin(self,state):
         self.bookmenu = [self.actionAddMember,self.actionAddBook]
         self.adminuser = True
+        self.lig.setVisible(False)
+        self.ciec.setVisible(True)
         if(state):
             for action in self.bookmenu:
                 action.setEnabled(True)
 
-
+stylesheet = """
+Main{
+    background-image:url("res/splash.png");
+    background-color:#000000;
+    background-position:center;
+}
+"""
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setStyleSheet(stylesheet)
     window = Main()
     sys.exit(app.exec_())

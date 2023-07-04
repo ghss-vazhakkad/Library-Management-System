@@ -22,6 +22,11 @@ sudo desktop-file-install ~/Desktop/Library.desktop
 ```
 
 # Build notes
+## 5 July 2023
+* Added splash screen
+* Changed the action of modify buttonb to login button in splash
+* Changed main window to maximized by default
+
 ## 4 July 2023
 * Added function to delete book
 * Added function to edit book
