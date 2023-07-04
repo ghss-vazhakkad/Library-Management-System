@@ -44,7 +44,7 @@ class Member:
         sheet = load_workbook(path)
         last = len(sheet["Sheet1"]["A"])
         for i in range(1,last):
-            if(sheet["Sheet1"][i][0].value == None  or sheet["Main"][i][0].value == ""):
+            if(sheet["Sheet1"][i][0].value == None  or sheet["Sheet1"][i][0].value == ""):
                 last = i-1
                 break
         row = sheet["Sheet1"][last+1]
@@ -52,7 +52,6 @@ class Member:
         row[0].value = self.id
         row[1].value = self.name
         row[2].value = self.status
-
         sheet.save(path)
     def load(path):
         rt = []
@@ -67,6 +66,16 @@ class Member:
                 mem.name = str(row[1].value)
                 mem.status = str(row[2].value)
                 rt.append(mem)
-                
-            
         return rt
+                
+    def getMemberById(id,path):
+        members = Member.load(path)
+        for member in members:
+            if(member.id == id):
+                return member
+        return None
+    def fgetMemberById(id,members):
+        for member in members:
+            if(member.id == id):
+                return member
+        return None

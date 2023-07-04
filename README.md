@@ -1,12 +1,35 @@
 # Library-Management-System
 A program written using python to store and retrieve data about school library.
 
+# Installation
+To install, first we need to install the libraries:
+```sh
+sudo apt update
+sudo apt install python3-pip -y
+pip3 install PyQt5
+pip3 install openpyxl
+```
+Then clone this repo and run library:
+
+```sh 
+git clone https://github.com/ghss-vazhakkad/Library-Management-System
+./library
+```
+
+If you want to install to system:
+```sh
+sudo desktop-file-install ~/Desktop/Library.desktop
+```
+
 # Build notes
 ## 3 July 2023
 * Added function to issue book by selecting both book and member.
 * Made all windows fixed to maintain stability.
 * Added a desktop file to open app remotely.
 * Added a new icon.
+* Added reserve option
+* Added book and member search bars
+* Disabled unused menu items
 ## 2 July 2023
 * Added window to add members.
 * The add member window writes information to excel file.

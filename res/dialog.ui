@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>291</width>
-    <height>159</height>
+    <width>300</width>
+    <height>151</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,20 +40,23 @@ QPushButton:hover{
   <widget class="QLabel" name="message">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>10</y>
-     <width>251</width>
+     <width>281</width>
      <height>91</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size:13pt;</string>
+    <string notr="true">font-size:11pt;</string>
    </property>
    <property name="text">
-    <string>Book Issued !</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
