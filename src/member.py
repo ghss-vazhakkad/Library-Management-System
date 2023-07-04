@@ -40,6 +40,7 @@ class Member:
         self.name = ""
         self.id = 0
         self.status = Member.STATUS_PLUS_TWO
+        self.row = 0
     def save(self,path):
         sheet = load_workbook(path)
         last = len(sheet["Sheet1"]["A"])
@@ -62,11 +63,17 @@ class Member:
             if(sample != "None" and sample != ""):
                 mem = Member()
                 row = sheet[i+1]
+                mem.row = i+1
                 mem.id = row[0].value
                 mem.name = str(row[1].value)
                 mem.status = str(row[2].value)
                 rt.append(mem)
         return rt
+    def delete(self,path):
+        book = load_workbook(path)
+        sheet = book["Sheet1"]
+        sheet.delete_rows(self.row)
+        book.save(path)
                 
     def getMemberById(id,path):
         members = Member.load(path)

@@ -157,7 +157,7 @@ border:1px solid #55000000;</string>
       <string>Member</string>
      </property>
      <addaction name="actionAddMember"/>
-     <addaction name="actionDelete"/>
+     <addaction name="actionDeleteMember"/>
     </widget>
     <widget class="QMenu" name="menubook">
      <property name="title">
@@ -259,7 +259,7 @@ border:1px solid #55000000;</string>
     <string>Add</string>
    </property>
   </action>
-  <action name="actionDelete">
+  <action name="actionDeleteMember">
    <property name="enabled">
     <bool>false</bool>
    </property>

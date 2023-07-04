@@ -38,16 +38,71 @@ class BookEntry(QDialog):
                     book.etype = Book.TYPE_DIRECT
                 else:
                     book.etype = Book.TYPE_DONATION
-                book.writetosheet("data/books.xlsx")
+                book.writetosheet(Book.DATA_FILE)
                 self.parent.loadbooks()
                 self.hide()
             except:
                 print("error")
+class BookEdit(QDialog):
+    def __init__(self,parent,book):
+        super(BookEdit, self).__init__()
+        uic.loadUi('res/bookentry.ui', self)
+        self.setFixedSize(self.size())
+        self.parent = parent
+        self.book = book
+        self.submit.clicked.connect(self.onupdate)
+        try:
+            self.dataTitle.setText(book.title)
+            self.dataID.setText(str(book.id))
+            self.dataAuthor.setText(book.author)
+            self.dataSubject.setText(book.subject)
+            self.dataLanguage.setText(book.language)
+            self.dataPrice.setText(str(book.price))
+            self.dataPublisher.setText(book.publisher)
+            self.dataYear.setText(str(book.year))
+            self.radioReference.setChecked(book.booktype ==  Book.BOOKTYPE_REFERENCE)
+            self.radioGeneral.setChecked(book.booktype ==  Book.BOOKTYPE_GENERAL)
+            self.radioGift.setChecked(book.etype == Book.TYPE_GIFT)
+            self.radioDirect.setChecked(book.etype == Book.TYPE_DIRECT)
+            self.radioDonation.setChecked(book.etype == Book.TYPE_DONATION)
+        except:
+            print("That's an error")
+        self.show()
+    def onupdate(self):
+        if self.dataTitle.text() != "" and self.dataID.text() != "":
+            #try:
+                book = Book()
+                book.date = [datetime.now().day,datetime.now().month,datetime.now().year]
+                book.title = self.dataTitle.text()
+                book.id = eval(self.dataID.text())
+                book.author = self.dataAuthor.text()
+                book.subject = self.dataSubject.text()
+                book.language = self.dataLanguage.text()
+                book.price = eval(self.dataPrice.text())
+                book.publisher = self.dataPublisher.text()
+                book.year = eval(self.dataYear.text())
+                if(self.radioReference.isChecked()):
+                    book.booktype = Book.BOOKTYPE_REFERENCE
+                else:
+                    book.booktype = Book.BOOKTYPE_GENERAL
+                if(self.radioGift.isChecked()):
+                    book.etype = Book.TYPE_GIFT
+                elif(self.radioDirect.isChecked()):
+                    book.etype = Book.TYPE_DIRECT
+                else:
+                    book.etype = Book.TYPE_DONATION
+                book.replace(Book.DATA_FILE)
+                self.parent.loadbooks()
+                self.hide()
+            #except:
+            #    print("error")
+        pass
 
         
 class Book:
     BOOKTYPE_GENERAL = 10
     BOOKTYPE_REFERENCE = 11
+    DATA_FILE = "data/books.xlsx"
     TYPE_DIRECT = 0
     TYPE_DONATION = 1
     TYPE_GIFT = 2
@@ -107,9 +162,28 @@ class Book:
         row[3].value = self.author
         row[11].value = self.issued
         sheet.save(path)
+    def delete(self,path):
+        book = load_workbook(path)
+        sheet = book["Main"]
+        if(self.row == 0):
+            for i in range(1,len(sheet["A"])):
+                try:
+                    bk = Book.loadfromrow(sheet[i])
+                    if(bk.id == self.id): self.row = i
+                except:
+                    pass
+        sheet.delete_rows(self.row)
+        book.save(path)
     def replace(self,path):
         book = load_workbook(path)
         sheet = book["Main"]
+        if(self.row == 0):
+            for i in range(1,len(sheet["A"])):
+                try:
+                    bk = Book.loadfromrow(sheet[i])
+                    if(bk.id == self.id): self.row = i
+                except:
+                    pass
         row = sheet[self.row]
         row[0].value = str(self.date[0])+"-"+str(self.date[1])+"-"+str(self.date[2])
         row[1].value = self.title

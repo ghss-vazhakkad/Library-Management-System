@@ -22,6 +22,10 @@ sudo desktop-file-install ~/Desktop/Library.desktop
 ```
 
 # Build notes
+## 4 July 2023
+* Added function to delete book
+* Added function to edit book
+* Now we can remove members
 ## 3 July 2023
 * Added function to issue book by selecting both book and member.
 * Made all windows fixed to maintain stability.
@@ -30,6 +34,7 @@ sudo desktop-file-install ~/Desktop/Library.desktop
 * Added reserve option
 * Added book and member search bars
 * Disabled unused menu items
+* It checks whether book is issued or not
 ## 2 July 2023
 * Added window to add members.
 * The add member window writes information to excel file.

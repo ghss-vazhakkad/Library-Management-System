@@ -37,13 +37,35 @@ class Main(QMainWindow):
         self.actionReserveBook.triggered.connect(self.reserve)
         self.memberList.clicked.connect(self.onSelectMember)
         self.bookList.clicked.connect(self.onSelectBook)
+        self.actionEditBook.triggered.connect(self.edit)
+        self.actionDeleteBook.triggered.connect(self.deleteBook)
+        self.actionDeleteMember.triggered.connect(self.deleteMember)
         self.memberSearch.textChanged.connect(self.onSearchMember)
         self.bookSearch.textChanged.connect(self.onSearchBook)
         # self.access = "ADMIN"
         # self.logged()
         self.show()
+    def deleteMember(self):
+        b = self.memberList.currentIndex().row()
+        book = self.member[b]
+        book.delete("data/members.xlsx")
+        self.qwindialdel = Dialog("Member removed",book.name+" is removed")
+        self.actionDeleteMember.setEnabled(False)
+        self.loadmembers()
+    def deleteBook(self):
+        b = self.bookList.currentIndex().row()
+        book = self.book[b]
+        book.delete(Book.DATA_FILE)
+        self.qwindialdel = Dialog("Book removed",book.title+" is removed")
+        self.actionDeleteBook.setEnabled(False)
+        self.loadbooks()
+    def edit(self):
+        b = self.bookList.currentIndex().row()
+        book = self.book[b]
+        self.qwinedit = BookEdit(self,book)
     def onSearchMember(self):
         text = str(self.memberSearch.text())
+        self.actionDeleteMember.setEnabled(False)
         self.actionIssueBook.setEnabled(False)
         self.membersearchmodel = QStandardItemModel()
         if(text == ""):
@@ -64,6 +86,8 @@ class Main(QMainWindow):
         text = str(self.bookSearch.text())
         self.booksearchmodel = QStandardItemModel()
         self.actionIssueBook.setEnabled(False)
+        self.actionEditBook.setEnabled(False)
+        self.actionDeleteBook.setEnabled(False)
         if(text == ""):
             self.bookList.setModel(self.bookmodel)
             self.book = self.books.copy()
@@ -80,7 +104,12 @@ class Main(QMainWindow):
     def onSelectBook(self,index):
         book = self.book[index.row()]
         self.bookclk = True
-        self.actionReserveBook.setEnabled(book.issued != "none")    
+        if(self.adminuser):
+            self.actionReserveBook.setEnabled(book.issued != "none")
+            self.actionEditBook.setEnabled(True) 
+            self.actionDeleteBook.setEnabled(True)
+        if(self.memberclk and self.bookclk and self.adminuser):
+            self.actionIssueBook.setEnabled(True)      
         pass
     def addmember(self):
         self.addmem = AddMember(self)
@@ -95,7 +124,7 @@ class Main(QMainWindow):
         if(book.issued != "none"):
             oldmem = Member.fgetMemberById(eval(book.issued),self.members).name
             book.issued = "none"
-            book.replace("data/books.xlsx")
+            book.replace(Book.DATA_FILE)
             self.actionReserveBook.setEnabled(False)  
             self.rd1 = Dialog("Book reserved",book.title+" has been reserved from "+oldmem)
         else:
@@ -108,7 +137,7 @@ class Main(QMainWindow):
         member = self.member[m]
         if(book.issued == "none"):
             book.issued = str(member.id)
-            book.replace("data/books.xlsx")
+            book.replace(Book.DATA_FILE)
             self.issued = Dialog("Book Issued",book.title+" issued to "+member.name)
             self.actionReserveBook.setEnabled(True)
         else:
@@ -117,6 +146,8 @@ class Main(QMainWindow):
         pass
     def onSelectMember(self):
         self.memberclk = True
+
+        if(self.adminuser): self.actionDeleteMember.setEnabled(True) 
         if(self.memberclk and self.bookclk and self.adminuser):
             self.actionIssueBook.setEnabled(True)
     def addbook(self):
@@ -133,7 +164,7 @@ class Main(QMainWindow):
     def loadbooks(self):
         self.bookmodel = QStandardItemModel()
         self.bookList.setModel(self.bookmodel)
-        bookxl = load_workbook("data/books.xlsx")
+        bookxl = load_workbook(Book.DATA_FILE)
         main = len(bookxl["Main"]["A"])
         self.books = []
         for i in range(1,main):
