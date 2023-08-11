@@ -106,6 +106,20 @@ padding:5px;</string>
      </widget>
     </item>
     <item>
+     <widget class="QLineEdit" name="ID">
+      <property name="styleSheet">
+       <string notr="true">color:#000000;
+background:#ffffff;
+border:1px solid #55000000;
+border-radius:10px;
+padding:5px;</string>
+      </property>
+      <property name="placeholderText">
+       <string>ID</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QPushButton" name="addButton">
       <property name="styleSheet">
        <string notr="true">QPushButton{

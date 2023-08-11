@@ -191,7 +191,9 @@ color:#ffffff;
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">background:#aaffffff;</string>
+       <string notr="true">background:#aaffffff;
+border-radius:10px;
+overflow:hidden;</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <property name="leftMargin">
@@ -268,7 +270,8 @@ color:#ffffff;
        <item>
         <widget class="QWidget" name="Lst" native="true">
          <property name="styleSheet">
-          <string notr="true">background:#ffffff;</string>
+          <string notr="true">background:#ffffff;
+border-radius:0px;</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <property name="leftMargin">

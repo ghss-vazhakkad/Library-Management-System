@@ -15,9 +15,15 @@ class AddMember(QDialog):
         self.addButton.clicked.connect(self.addmember)
     def addmember(self):
         name = str(self.name.text())
+        id = 0
+        try:
+            id = eval(self.id.text())
+        except:
+            pass
         member = Member()
         if(name != ""):
             member.name = name
+            member.id = id
             if(self.radioTeacher.isChecked()):
                 member.status = Member.STATUS_TEACHER
             elif(self.radioNonTeacher.isChecked()):
@@ -49,7 +55,7 @@ class Member:
                 last = i-1
                 break
         row = sheet["Sheet1"][last+1]
-        self.id = last+1
+        if(self.id == 0): self.id = last+1
         row[0].value = self.id
         row[1].value = self.name
         row[2].value = self.status

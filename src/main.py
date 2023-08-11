@@ -43,8 +43,8 @@ class Main(QMainWindow):
         self.actionDeleteMember.triggered.connect(self.deleteMember)
         self.memberSearch.textChanged.connect(self.onSearchMember)
         self.bookSearch.textChanged.connect(self.onSearchBook)
-        # self.access = "ADMIN"
-        # self.logged()
+        self.access = "ADMIN"
+        self.logged()
         self.show()
     def deleteMember(self):
         b = self.memberList.currentIndex().row()
@@ -76,7 +76,7 @@ class Main(QMainWindow):
             self.memberList.setModel(self.membersearchmodel)
             self.member = []
             for member in self.members:
-                if(member.name.startswith(text)):
+                if(member.name.upper().startswith(text.upper())):
                     self.member.append(member)
                     item = QStandardItem(member.name)
                     item.setEditable(False)
@@ -95,8 +95,28 @@ class Main(QMainWindow):
         else:
             self.bookList.setModel(self.booksearchmodel)
             self.book = []
+            if(text.startswith(":")):
+                prefix = text.split(":")[1]
+                print(prefix.upper())
+                if prefix.upper() == "ISSUED":
+                   for book in self.books:
+                       if(book.issued != "none"):
+                           self.book.append(book)
+                           item = QStandardItem(book.title)
+                           item.setEditable(False)
+                           self.booksearchmodel.appendRow(item)
+                elif prefix.upper() == "RESERVED":
+                   for book in self.books:
+                       if(book.issued == "none"):
+                           self.book.append(book)
+                           item = QStandardItem(book.title)
+                           item.setEditable(False)
+                           self.booksearchmodel.appendRow(item) 
+                return
+                    
+
             for book in self.books:
-                if(book.title.startswith(text)):
+                if(book.title.upper().startswith(text.upper())):
                     self.book.append(book)
                     item = QStandardItem(book.title)
                     item.setEditable(False)
