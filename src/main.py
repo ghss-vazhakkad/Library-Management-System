@@ -24,8 +24,8 @@ class Main(QMainWindow):
     def __init__(self):
         super(Main, self).__init__()
         uic.loadUi('res/main.ui', self)
-        self.setWindowState(QtCore.Qt.WindowState.WindowMaximized)
         self.ciec.setVisible(False)
+        self.circulation.triggered.connect(self.circulate)
         self.loginBtn.clicked.connect(self.login)
         self.actionAddMember.triggered.connect(self.addmember)
         self.userdata = logindata
@@ -43,9 +43,12 @@ class Main(QMainWindow):
         self.actionDeleteMember.triggered.connect(self.deleteMember)
         self.memberSearch.textChanged.connect(self.onSearchMember)
         self.bookSearch.textChanged.connect(self.onSearchBook)
-        self.access = "ADMIN"
-        self.logged()
-        self.show()
+        
+        self.showMaximized()
+    def circulate(self):
+        if(self.adminuser):
+            self.lig.setVisible(False)
+            self.ciec.setVisible(True)
     def deleteMember(self):
         b = self.memberList.currentIndex().row()
         book = self.member[b]
@@ -203,8 +206,7 @@ class Main(QMainWindow):
     def admin(self,state):
         self.bookmenu = [self.actionAddMember,self.actionAddBook]
         self.adminuser = True
-        self.lig.setVisible(False)
-        self.ciec.setVisible(True)
+        self.loginBtn.setVisible(False)
         if(state):
             for action in self.bookmenu:
                 action.setEnabled(True)

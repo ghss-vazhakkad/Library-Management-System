@@ -305,7 +305,9 @@ border:1px solid #55000000;</string>
             <item>
              <widget class="QListView" name="bookList">
               <property name="styleSheet">
-               <string notr="true">padding:3px;</string>
+               <string notr="true">padding:3px;
+border:1px solid #00000055;
+</string>
               </property>
              </widget>
             </item>

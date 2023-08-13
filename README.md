@@ -22,6 +22,10 @@ sudo desktop-file-install ~/Desktop/Library.desktop
 ```
 
 # Build notes
+## 13 August 2023
+* Added supports for continous addition of books
+* Made books list hidden after login
+
 ## 5 July 2023
 * Added splash screen
 * Changed the action of modify buttonb to login button in splash

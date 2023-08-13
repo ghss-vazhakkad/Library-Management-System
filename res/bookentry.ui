@@ -44,6 +44,12 @@ QLineEdit:hover{
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLineEdit" name="dataTitle">
+      <property name="styleSheet">
+       <string notr="true">text-transform:capitalize;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
       <property name="placeholderText">
        <string>Title</string>
       </property>
@@ -133,6 +139,9 @@ QLineEdit:hover{
             <property name="text">
              <string>General</string>
             </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -141,7 +150,7 @@ QLineEdit:hover{
              <string>Reference</string>
             </property>
             <property name="checked">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
             <property name="autoExclusive">
              <bool>true</bool>
@@ -209,6 +218,12 @@ QLineEdit:hover{
             <property name="text">
              <string>Direct</string>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
          </layout>
@@ -218,18 +233,51 @@ QLineEdit:hover{
      </layout>
     </item>
     <item>
-     <widget class="QPushButton" name="submit">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <property name="spacing">
+       <number>6</number>
       </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">#submit{
+      <item>
+       <widget class="QPushButton" name="close_btn">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+	background:rgb(0, 85, 255);
+	border:1px solid #00000055;
+	padding:5px 10px;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:hover{
+	background:rgb(0, 0, 144);
+}</string>
+        </property>
+        <property name="text">
+         <string>CLOSE</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="submit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#submit{
 	background:rgb(0, 85, 255);
 	border:1px solid #00000055;
 	padding:5px 10px;
@@ -239,11 +287,13 @@ QLineEdit:hover{
 #submit:hover{
 	background:rgb(0, 0, 144);
 }</string>
-      </property>
-      <property name="text">
-       <string>Submit</string>
-      </property>
-     </widget>
+        </property>
+        <property name="text">
+         <string>ADD</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

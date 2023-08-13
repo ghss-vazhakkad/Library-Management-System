@@ -14,6 +14,7 @@ class BookEntry(QDialog):
         self.setFixedSize(self.size())
         self.parent = parent
         self.submit.clicked.connect(self.onadd)
+        self.close_btn.clicked.connect(self.hide)
         self.show()
     def onadd(self):
         if self.dataTitle.text() != "" and self.dataID.text() != "":
@@ -25,9 +26,9 @@ class BookEntry(QDialog):
                 book.author = self.dataAuthor.text()
                 book.subject = self.dataSubject.text()
                 book.language = self.dataLanguage.text()
-                book.price = eval(self.dataPrice.text())
                 book.publisher = self.dataPublisher.text()
-                book.year = eval(self.dataYear.text())
+                if(self.dataYear.text() != ""): book.year = eval(self.dataYear.text())
+                if(self.dataPrice.text() != ""): book.price = eval(self.dataPrice.text())
                 if(self.radioReference.isChecked()):
                     book.booktype = Book.BOOKTYPE_REFERENCE
                 else:
@@ -39,10 +40,22 @@ class BookEntry(QDialog):
                 else:
                     book.etype = Book.TYPE_DONATION
                 book.writetosheet(Book.DATA_FILE)
+                
                 self.parent.loadbooks()
-                self.hide()
+
+                self.reset(book.id)
             except:
-                print("error")
+                print("That's an error")
+    def reset(self,id):
+        self.dataTitle.setText("")
+        self.dataID.setText(str(id+1))
+        self.dataAuthor.setText("")
+        self.dataSubject.setText("")
+        self.dataLanguage.setText("")
+        self.dataPublisher.setText("")
+        self.dataYear.setText("")
+        self.dataPrice.setText("")
+
 class BookEdit(QDialog):
     def __init__(self,parent,book):
         super(BookEdit, self).__init__()
