@@ -15,6 +15,7 @@ class BookEntry(QDialog):
         self.parent = parent
         self.submit.clicked.connect(self.onadd)
         self.close_btn.clicked.connect(self.hide)
+        self.dataID.setText(str(self.parent.getLastBookID()))
         self.show()
     def onadd(self):
         if self.dataTitle.text() != "" and self.dataID.text() != "":
@@ -48,7 +49,7 @@ class BookEntry(QDialog):
                 print("That's an error")
     def reset(self,id):
         self.dataTitle.setText("")
-        self.dataID.setText(str(id+1))
+        self.dataID.setText(str(self.parent.getLastBookID()))
         self.dataAuthor.setText("")
         self.dataSubject.setText("")
         self.dataLanguage.setText("")

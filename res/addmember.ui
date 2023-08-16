@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>241</width>
-    <height>292</height>
+    <height>280</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>9</x>
      <y>9</y>
      <width>221</width>
-     <height>271</height>
+     <height>261</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -106,7 +106,7 @@ padding:5px;</string>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="ID">
+     <widget class="QLineEdit" name="id">
       <property name="styleSheet">
        <string notr="true">color:#000000;
 background:#ffffff;

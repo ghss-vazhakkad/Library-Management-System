@@ -49,6 +49,20 @@ class Main(QMainWindow):
         if(self.adminuser):
             self.lig.setVisible(False)
             self.ciec.setVisible(True)
+    def getLastBookID(self):
+        id=0
+        for book in self.books:
+            if(book.id > id):
+                id = book.id
+        
+        id+=1
+        return id
+    def getLastMemberID(self):
+        id=0
+        for member in self.members:
+            if(member.id > id):
+                id = member.id
+        return id+1
     def deleteMember(self):
         b = self.memberList.currentIndex().row()
         book = self.member[b]

@@ -22,6 +22,10 @@ sudo desktop-file-install ~/Desktop/Library.desktop
 ```
 
 # Build notes
+## 16 August 2023
+* Continuous addition also added to member list.
+* Last incrimented id will be loaded on each id text view
+
 ## 13 August 2023
 * Added supports for continous addition of books
 * Made books list hidden after login

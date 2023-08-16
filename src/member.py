@@ -13,6 +13,7 @@ class AddMember(QDialog):
         self.show()
         self.parent = parent
         self.addButton.clicked.connect(self.addmember)
+        self.reset()
     def addmember(self):
         name = str(self.name.text())
         id = 0
@@ -34,7 +35,11 @@ class AddMember(QDialog):
                 member.status = Member.STATUS_PLUS_TWO
             member.save("data/members.xlsx")
             self.parent.loadmembers()
-            self.hide()
+            self.reset()
+    def reset(self):
+        self.name.setText("")
+        self.id.setText(str(self.parent.getLastMemberID()))
+
 
 
 class Member:
