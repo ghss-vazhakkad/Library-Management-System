@@ -43,7 +43,8 @@ class Main(QMainWindow):
         self.actionDeleteMember.triggered.connect(self.deleteMember)
         self.memberSearch.textChanged.connect(self.onSearchMember)
         self.bookSearch.textChanged.connect(self.onSearchBook)
-        
+        self.access = "ADMIN"
+        self.logged()
         self.showMaximized()
     def circulate(self):
         if(self.adminuser):
