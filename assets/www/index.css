@@ -3,25 +3,137 @@
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
-
 div{
     display: flex;
+
 }
 
-.nav{
-    display: flex;
-    max-width: 25%;
-    min-width: 20%;
-    height: 100vh;
+.content{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
     flex-direction: column;
-    padding: 20px;
-    background-color: #009ccc;
-    color: #fff;
+    background: url(../../res/splash.png);
+    overflow: hidden;
+    color: white;
 }
 
-.nav .header h1{
-    text-align: left;
-    margin-left: 20px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+.header{
+    width: 100%;
+    padding: 30px 30px;
+}
+
+.header .title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24pt;
+    font-weight: bold; 
+    margin-left: 30px;
+}
+
+.header>.search{
+    margin-left: auto;
+    margin-right: 60px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 30px;
+}
+
+.header .search:hover{
+    box-shadow: 0 0 2px 2px #f94;
+}
+
+.header .search input.search-main{
+    background: none;
+    color: #000;
+    border: none;
+    padding: 0 15px;
+    border: 1px solid #0000;
+    outline: none;
+}
+
+.header .search button{
+    background:none;
+    border: none;
+    width: 40px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.body{
+    height: 100%;
+}
+
+.login{
+    flex-direction: column;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #0005;
+    margin-left: 100px;
+    padding: 50px 70px;
+    background: #000000;
+    border-radius: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.login form{
+
+}
+
+.login form input{
+    background:#0000;
+    border: 1px solid #0005;
+    outline: none;
+    color: #000;
+    background: #fff;
+    margin-bottom: 12px;
+    transition-duration: 300ms;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.login form input:hover{
+    border: 1px solid #0005;
+}
+
+.login form button{
+    background:rgba(2, 255, 99, 1);
+    border: none;
+    color: #fff;
+    font-size: 12pt;
+    text-transform: uppercase;
+    width: fit-content;
+    margin:auto;
+    border-radius: 20px;
+
+    padding: 5px 30px;
+    margin-top: 20px;
+}
+
+
+.login .head button.close{
+    background: none;
+    border: none;
+}
+
+
+
+.login .head .title{
+    font-size: 18pt;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 20px 0;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+
+.login form{
+    display: flex;
+    flex-direction: column;
 }

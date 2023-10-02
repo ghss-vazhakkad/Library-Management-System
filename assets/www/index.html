@@ -4,19 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management System</title>
+
+    <link rel="stylesheet" href="icons.css">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div class="content">
-        <div class="nav">
-            <div class="header">
-                <h1>Library</h1>
+        <div class="header">
+            <span class="title">Library Management System </span>
+            <div class="search">
+                <input type="text" class="search-main" placeholder="Search books">
+                <button class="search-btn-main">
+                    <span class="search-icon">
+                        <span class="lens"></span>
+                        <span class="hand"></span>
+                    </span>
+                </button>
             </div>
-            <div class="top"></div>
-            <div class="bottom"></div>
-            <div class="footer"></div>
         </div>
-        <div class="frame"></div>
+        <div class="body">
+            <div class="login">
+                <div class="head">
+                    <span class="title">Login</span>
+                    <button class="close"></button>
+                </div>
+                <form action="#">
+                    <input type="text" placeholder="Username">
+                    <input type="text" placeholder="Password">
+                    <button class="login-btn">Login</button>
+                </form>
+            </div>
+        </div>
     </div>
     <script src="index.js"></script>
 </body>

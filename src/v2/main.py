@@ -17,5 +17,7 @@ class Api:
 if __name__ == '__main__':
     api = Api()
     window = webview.create_window('Library Management System', "../../assets/www/index.html", js_api=api)
+    window.fullscreen = True
     webview.start()
+    
     
