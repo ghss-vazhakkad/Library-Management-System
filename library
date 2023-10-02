@@ -4,7 +4,7 @@ INSTALL_DIR=$HOME/.local/library/
 
 setup(){
     here=$(dirname $0)
-    [ -e $INSTALL_DIR/data ] && cp -r $INSTALL_DIR/data $here
+    [ -e $INSTALL_DIR/data ] && tar -czf $INSTALL_DIR/../library-data.tar.gz $INSTALL_DIR/data/*
     [ -e $INSTALL_DIR ] && rm -r $INSTALL_DIR && rm $HOME/Desktop/Library.desktop
     mkdir -p $INSTALL_DIR
     cp -r $here/* $INSTALL_DIR

@@ -65,6 +65,9 @@ class BookEdit(QDialog):
         self.parent = parent
         self.book = book
         self.submit.clicked.connect(self.onupdate)
+        self.submit.setText("UPDATE")
+
+        self.close_btn.clicked.connect(self.hide)
         try:
             self.dataTitle.setText(book.title)
             self.dataID.setText(str(book.id))
@@ -105,7 +108,8 @@ class BookEdit(QDialog):
                     book.etype = Book.TYPE_DIRECT
                 else:
                     book.etype = Book.TYPE_DONATION
-                book.replace(Book.DATA_FILE)
+                book.row = self.book.row
+                book.writetosheet("data/books.xlsx")
                 self.parent.loadbooks()
                 self.hide()
             #except:
@@ -163,6 +167,7 @@ class Book:
                 last = i-1
                 break
         row = sheet["Main"][last+1]
+        if(self.row != 0): row = sheet["Main"][self.row]
         row[0].value = str(self.date[0])+"-"+str(self.date[1])+"-"+str(self.date[2])
         row[1].value = self.title
         row[2].value = self.id
@@ -188,28 +193,4 @@ class Book:
                     pass
         sheet.delete_rows(self.row)
         book.save(path)
-    def replace(self,path):
-        book = load_workbook(path)
-        sheet = book["Main"]
-        if(self.row == 0):
-            for i in range(1,len(sheet["A"])):
-                try:
-                    bk = Book.loadfromrow(sheet[i])
-                    if(bk.id == self.id): self.row = i
-                except:
-                    pass
-        row = sheet[self.row]
-        row[0].value = str(self.date[0])+"-"+str(self.date[1])+"-"+str(self.date[2])
-        row[1].value = self.title
-        row[2].value = self.id
-        row[4].value = self.subject
-        row[5].value = self.language
-        row[6].value = self.price
-        row[7].value = self.publisher
-        row[8].value = self.year
-        row[9].value = self.booktype
-        row[10].value = self.etype
-        row[3].value = self.author
-        row[11].value = self.issued
-        book.save(path)
-        
+    

@@ -22,6 +22,12 @@ sudo desktop-file-install ~/Desktop/Library.desktop
 ```
 
 # Build notes
+## 2 Octobar 2023
+* Fixed some bugs
+* Added support for editing members
+* Created a new menu to report books and members
+* Started a new sub project for v2
+
 ## 16 August 2023
 * Continuous addition also added to member list.
 * Last incrimented id will be loaded on each id text view

@@ -41,6 +41,49 @@ class AddMember(QDialog):
         self.id.setText(str(self.parent.getLastMemberID()))
 
 
+class EditMember(QDialog):
+    def __init__(self,parent,member):
+        super(EditMember,self).__init__()
+        uic.loadUi('res/addmember.ui', self)
+        self.setFixedSize(self.size())
+        self.show()
+        self.parent = parent
+        self.addButton.setText("UPDATE")
+        self.addButton.clicked.connect(self.addmember)
+
+        self.name.setText(member.name)
+        self.id.setText(str(member.id))
+        radios = [self.radioTeacher,self.radioNonTeacher,self.radioPlusOne,self.radioPlusTwo]
+        statuses = [Member.STATUS_TEACHER,Member.STATUS_NON_TEACHER,Member.STATUS_PLUS_ONE,Member.STATUS_PLUS_TWO]
+        i=0
+        while i < 4:
+            radios[i].setChecked(False)
+            if(member.status == statuses[i]): radios[i].setChecked(True)
+            i += 1
+        self.last = member
+    def addmember(self):
+        name = str(self.name.text())
+        id = 0
+        try:
+            id = eval(self.id.text())
+        except:
+            pass
+        member = self.last
+        if(name != ""):
+            member.name = name
+            member.id = id
+            if(self.radioTeacher.isChecked()):
+                member.status = Member.STATUS_TEACHER
+            elif(self.radioNonTeacher.isChecked()):
+                member.status = Member.STATUS_NON_TEACHER
+            elif(self.radioPlusOne.isChecked()):
+                member.status = Member.STATUS_PLUS_ONE
+            else:
+                member.status = Member.STATUS_PLUS_TWO
+            member.update("data/members.xlsx")
+            self.parent.loadmembers()
+            self.hide()
+
 
 class Member:
     STATUS_TEACHER = "Teacher"
@@ -80,6 +123,17 @@ class Member:
                 mem.status = str(row[2].value)
                 rt.append(mem)
         return rt
+    def update(self,path):
+        sheet = load_workbook(path)
+        sh = sheet["Sheet1"]
+        length = len(sh["A"])
+        row = sh[self.row]
+        row[0].value = self.id
+        row[1].value = self.name
+        row[2].value = self.status
+
+        sheet.save(path)
+        
     def delete(self,path):
         book = load_workbook(path)
         sheet = book["Sheet1"]

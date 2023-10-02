@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>794</width>
-    <height>990</height>
+    <height>993</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -352,7 +352,7 @@ border:1px solid #55000000;</string>
      <x>0</x>
      <y>0</y>
      <width>794</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="circulation">
@@ -365,6 +365,7 @@ border:1px solid #55000000;</string>
      </property>
      <addaction name="actionAddMember"/>
      <addaction name="actionDeleteMember"/>
+     <addaction name="actionEditMember"/>
     </widget>
     <widget class="QMenu" name="menubook">
      <property name="title">
@@ -378,6 +379,7 @@ border:1px solid #55000000;</string>
     </widget>
     <addaction name="menuMember"/>
     <addaction name="menubook"/>
+    <addaction name="actionBookShowList"/>
    </widget>
    <widget class="QMenu" name="menuAquisition">
     <property name="enabled">
@@ -410,20 +412,18 @@ border:1px solid #55000000;</string>
    </widget>
    <widget class="QMenu" name="menuReport">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="title">
      <string>Report</string>
     </property>
-    <addaction name="actionGeneral"/>
-    <addaction name="actionReference"/>
-    <addaction name="actionDonated"/>
-    <addaction name="actionLibrary_Card"/>
+    <addaction name="actionReportBooks"/>
+    <addaction name="actionReportMembers"/>
    </widget>
    <addaction name="circulation"/>
+   <addaction name="menuReport"/>
    <addaction name="menuAquisition"/>
    <addaction name="menuTechnical"/>
-   <addaction name="menuReport"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionCatalogue">
@@ -434,12 +434,12 @@ border:1px solid #55000000;</string>
     <string>Catalogue</string>
    </property>
   </action>
-  <action name="actionGeneral">
+  <action name="actionReportBooks">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>General</string>
+    <string>Books</string>
    </property>
   </action>
   <action name="actionReference">
@@ -452,9 +452,12 @@ border:1px solid #55000000;</string>
     <string>Donated</string>
    </property>
   </action>
-  <action name="actionLibrary_Card">
+  <action name="actionReportMembers">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
-    <string>Library Card</string>
+    <string>Members</string>
    </property>
   </action>
   <action name="actionAddMember">
@@ -544,6 +547,22 @@ border:1px solid #55000000;</string>
   <action name="actionGift">
    <property name="text">
     <string>Gift</string>
+   </property>
+  </action>
+  <action name="actionBookShowList">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show list</string>
+   </property>
+  </action>
+  <action name="actionEditMember">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Edit</string>
    </property>
   </action>
  </widget>
